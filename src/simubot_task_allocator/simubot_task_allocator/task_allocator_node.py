@@ -26,7 +26,7 @@ class TaskAllocator(Node):
 
         # Track "fake" robot poses (could be replaced by TF lookup or odom subscription)
         self.robot_xy: Dict[str, Tuple[float,float]] = {f'robot_{i+1}': (i*1.5, 0.0) for i in range(self.robot_count)}
-        self.publishers = {
+        self.goal_publishers = {
             name: self.create_publisher(PoseStamped, f'/{name}/goal_pose', 10)
             for name in self.robot_xy.keys()
         }
@@ -65,7 +65,7 @@ class TaskAllocator(Node):
         goal.pose.position.y = float(pick[1])
         goal.pose.orientation.w = 1.0
 
-        self.publishers[best_robot].publish(goal)
+        self.goal_publishers[best_robot].publish(goal)
 
     # (Extend later with battery, workload, RL, etc. without interface change.)
 
