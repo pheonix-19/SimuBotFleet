@@ -193,4 +193,10 @@
     <axis xyz="0 0 0" />
   </joint>
 
+  <!-- Include ros2_control after all links and joints are defined -->
+  <xacro:simubot_ros2_control />
+
+  <!-- Include Gazebo configuration after all links and joints are defined -->
+  <xacro:simubot_gazebo />
+
 </robot>
