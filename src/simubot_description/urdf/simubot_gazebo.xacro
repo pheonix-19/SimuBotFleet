@@ -2,6 +2,8 @@
 
 <robot name="simubot" xmlns:xacro="http://ros.org/wiki/xacro">
 
+  <xacro:macro name="simubot_gazebo">
+
   <!-- Wheels -->
   <gazebo reference="wheel_left_link">
     <mu1>1000000000000000.0</mu1>
@@ -68,7 +70,6 @@
     <sensor name="imu" type="imu">
         <always_on>true</always_on>
         <update_rate>100</update_rate>
-        <gz_frame_id>imu_link</gz_frame_id>
         <topic>imu</topic>
         <imu>
           <angular_velocity>
@@ -114,5 +115,7 @@
         </imu>
     </sensor>
   </gazebo>
+
+  </xacro:macro>
 
 </robot>
