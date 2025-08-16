@@ -6,4 +6,4 @@ redis
 pika
 psycopg2-binary
 prometheus-client
-rclpy
+# rclpy is provided by ROS 2 installation, not pip
