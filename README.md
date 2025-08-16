@@ -1909,7 +1909,7 @@ This project uses several open-source libraries and frameworks:
 - **Name**: Ayush
 - **Email**: [am2836166@gmail.com](mailto:am2836166@gmail.com)
 - **GitHub**: [@pheonix-19](https://github.com/pheonix-19)
-- **LinkedIn**: [Connect on LinkedIn](https://linkedin.com/in/your-profile)
+- **LinkedIn**: [Connect on LinkedIn](https://www.linkedin.com/in/ayush-523956257/)
 
 ### Project Information
 - **Repository**: [https://github.com/pheonix-19/SimuBotFleet](https://github.com/pheonix-19/SimuBotFleet)
