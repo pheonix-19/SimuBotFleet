@@ -1,0 +1,45 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: simubot
+      POSTGRES_DB: simubot
+      POSTGRES_USER: simubot
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ../simubot_db/schema.sql:/docker-entrypoint-initdb.d/00_schema.sql:ro
+    ports: ["5432:5432"]
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports: ["5672:5672", "15672:15672"]
+
+  simubot-api:
+    build: ../simubot_api
+    environment:
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/
+    depends_on: [rabbitmq]
+    ports: ["8000:8000"]
+
+  queue-bridge:
+    build: ../simubot_api
+    command: ["python", "-m", "app.worker"]
+    network_mode: service:simubot-api
+    environment:
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/
+    depends_on: [rabbitmq, simubot-api]
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ../simubot_monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports: ["9090:9090"]
+    depends_on: [simubot-api]
+
+  grafana:
+    image: grafana/grafana
+    ports: ["3000:3000"]
+    depends_on: [prometheus]
+
+volumes:
+  pgdata:

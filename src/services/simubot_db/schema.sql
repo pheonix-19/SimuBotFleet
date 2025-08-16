@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS robots (
+  id SERIAL PRIMARY KEY,
+  name TEXT UNIQUE NOT NULL,
+  battery NUMERIC DEFAULT 100,
+  status TEXT DEFAULT 'idle'
+);
+
+CREATE TABLE IF NOT EXISTS tasks (
+  id SERIAL PRIMARY KEY,
+  pick_x NUMERIC NOT NULL,
+  pick_y NUMERIC NOT NULL,
+  drop_x NUMERIC NOT NULL,
+  drop_y NUMERIC NOT NULL,
+  priority INT DEFAULT 1,
+  status TEXT DEFAULT 'queued',
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS inventory_events (
+  id SERIAL PRIMARY KEY,
+  event JSONB,
+  created_at TIMESTAMP DEFAULT NOW()
+);
